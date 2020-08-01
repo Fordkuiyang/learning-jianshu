@@ -17,7 +17,14 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <CSSTransition in={this.state.show}>
+        <CSSTransition
+          in={this.state.show}
+          timeout={1000}
+          classNames="fade"
+          unmountOnExit
+          appear={true}
+          onEnter={(ele) => (ele.style.color = "pink")}
+        >
           <div>hello, man</div>
         </CSSTransition>
         <button onClick={this.handleToggle}>toggle</button>
