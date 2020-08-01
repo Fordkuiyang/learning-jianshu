@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div>hello, man</div>
+        <div className={this.state.show ? "show" : "hide"}>hello, man</div>
 
         <button onClick={this.handleToggle}>toggle</button>
       </Fragment>
