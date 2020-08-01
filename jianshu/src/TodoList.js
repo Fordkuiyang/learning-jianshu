@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./style.css";
 import TodoItem from "./TodoItem";
+import axios from "axios";
 
 class TodoList extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class TodoList extends Component {
   }
   handleInputChange = (e) => {
     const value = e.target.value;
+    // this.setState是一个异步函数，会有回调函数
     this.setState(() => ({
       inputValue: value,
     }));
@@ -34,6 +36,20 @@ class TodoList extends Component {
     });
   };
 
+  componentDidMount() {
+    axios
+      .get("/api/todolist")
+      .then((res) => {
+        console.log(res.data);
+        this.setState(() =>({
+          list: [ ...res.data]
+        }))
+      })
+      .catch((err) => {
+        console.log("error");
+      });
+  }
+
   getTodoItem = () => {
     return this.state.list.map((item, index) => {
       return (
@@ -46,6 +62,30 @@ class TodoList extends Component {
       );
     });
   };
+  // //徐建即将被挂在到页面之前，自动执行
+  // componentWillMount() {
+  //   console.log("componentWillMount");
+  // }
+
+  // // 组件被挂在到页面之后，自动执行
+  // componentDidMount() {
+  //   console.log("componentDidMount");
+  // }
+
+  // // 组件被更新之前，他会自动被执行
+  // shouldComponentUpdate() {
+  //   console.log("shouldComponentUpdate");
+  //   return true;
+  // }
+  // // 组件被更新之前，它会自动执行，但是他在shouldCompoent之后被执行
+  // componentWillUpdate() {
+  //   console.log("componentWillUpdate");
+  //   return false;
+  // }
+  // componentDidUpdate() {
+  //   console.log("componentDidUpdate");
+  // }
+
   render() {
     return (
       <Fragment>
