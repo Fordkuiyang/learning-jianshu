@@ -17,8 +17,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className={this.state.show ? "show" : "hide"}>hello, man</div>
-
+        <CSSTransition in={this.state.show}>
+          <div>hello, man</div>
+        </CSSTransition>
         <button onClick={this.handleToggle}>toggle</button>
       </Fragment>
     );
