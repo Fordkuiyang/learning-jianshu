@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Todolit from "./Todolist";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Todolit />
   </React.StrictMode>,
   document.getElementById("root")
 );
