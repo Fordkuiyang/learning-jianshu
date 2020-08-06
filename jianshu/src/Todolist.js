@@ -27,12 +27,19 @@ class Todolist extends Component {
     };
     store.dispatch(action);
   };
+  handleItemClick = (index) => {
+    const action = {
+      type: "delete_todo_item",
+      index: index,
+    };
+    store.dispatch(action);
+  };
   render() {
     return (
       <div>
         <div style={{ marginTop: "10px", marginLeft: "10px" }}>
           <Input
-            placeholder="todo infor"
+            placeholder="todo information"
             style={{ width: 300, marginRight: "10px" }}
             value={this.state.inputValue}
             onChange={this.handleInputChange}
@@ -45,7 +52,11 @@ class Todolist extends Component {
           style={{ marginTop: "10px", width: "300px", marginLeft: "10px" }}
           bordered
           dataSource={this.state.list}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          renderItem={(item, index) => (
+            <List.Item onClick={this.handleItemClick.bind(this, index)}>
+              {item}
+            </List.Item>
+          )}
         />
       </div>
     );

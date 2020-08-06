@@ -1,6 +1,6 @@
 const defaultState = {
-  inputValue: "123",
-  list: ["frod", "Andy"],
+  inputValue: "",
+  list: [],
 };
 //reducer 可以接受state, 但是绝不定修改state
 export default (state = defaultState, action) => {
@@ -12,6 +12,10 @@ export default (state = defaultState, action) => {
     const newState = JSON.parse(JSON.stringify(state));
     newState.list.push(newState.inputValue);
     newState.inputValue = "";
+    return newState;
+  } else if (action.type === "delete_todo_item") {
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.list.splice(action.index, 1);
     return newState;
   }
   return state;
