@@ -7,7 +7,19 @@ class Todolist extends Component {
   constructor(props) {
     super(props);
     this.state = store.getState();
+    store.subscribe(this.handleStoreChange);
   }
+  handleStoreChange = () => {
+    this.setState(store.getState());
+  };
+  handleInputChange = (event) => {
+    const action = {
+      type: "change_input_value",
+      value: event.target.value,
+    };
+
+    store.dispatch(action);
+  };
   render() {
     return (
       <div>
@@ -16,6 +28,7 @@ class Todolist extends Component {
             placeholder="todo infor"
             style={{ width: 300, marginRight: "10px" }}
             value={this.state.inputValue}
+            onChange={this.handleInputChange}
           />
           <Button type="primary">提交</Button>
         </div>
