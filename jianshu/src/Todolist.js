@@ -20,6 +20,13 @@ class Todolist extends Component {
 
     store.dispatch(action);
   };
+
+  hanldeBtnClick = () => {
+    const action = {
+      type: "add_todo_item",
+    };
+    store.dispatch(action);
+  };
   render() {
     return (
       <div>
@@ -30,7 +37,9 @@ class Todolist extends Component {
             value={this.state.inputValue}
             onChange={this.handleInputChange}
           />
-          <Button type="primary">提交</Button>
+          <Button type="primary" onClick={this.hanldeBtnClick}>
+            提交
+          </Button>
         </div>
         <List
           style={{ marginTop: "10px", width: "300px", marginLeft: "10px" }}
