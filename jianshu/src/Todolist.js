@@ -3,10 +3,10 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Input, Button, List } from "antd";
 import store from "./store";
 import {
-  CHANGE_INPUT_VALUE,
-  ADD_TODO_ITEM,
-  DELETE_TODO_ITEM,
-} from "./store/actionType";
+  getInputChangeAction,
+  getAddItemAction,
+  getDeleteItemAction,
+} from "./store/actionCreators";
 const data = [];
 class Todolist extends Component {
   constructor(props) {
@@ -18,25 +18,16 @@ class Todolist extends Component {
     this.setState(store.getState());
   };
   handleInputChange = (event) => {
-    const action = {
-      type: CHANGE_INPUT_VALUE,
-      value: event.target.value,
-    };
-
+    const action = getInputChangeAction(event.target.value);
     store.dispatch(action);
   };
 
   hanldeBtnClick = () => {
-    const action = {
-      type: ADD_TODO_ITEM,
-    };
+    const action = getAddItemAction();
     store.dispatch(action);
   };
   handleItemClick = (index) => {
-    const action = {
-      type: DELETE_TODO_ITEM,
-      index: index,
-    };
+    const action = getDeleteItemAction(index);
     store.dispatch(action);
   };
   render() {
