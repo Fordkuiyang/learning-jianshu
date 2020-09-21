@@ -5,13 +5,10 @@ import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
-  initListAction,
+  getTodolist,
 } from "./store/actionCreators";
 
 import TodoListUI from "./TodoListUI";
-import axios from "axios";
-
-const data = [];
 
 class Todolist extends Component {
   constructor(props) {
@@ -37,11 +34,8 @@ class Todolist extends Component {
   };
 
   componentDidMount() {
-    axios.get("./list.json").then((res) => {
-      const data = res.data;
-      const action = initListAction(data);
-      store.dispatch(action);
-    });
+    const action = getTodolist();
+    store.dispatch(action);
   }
   render() {
     return (
